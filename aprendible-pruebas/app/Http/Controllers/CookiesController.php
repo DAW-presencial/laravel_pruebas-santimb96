@@ -57,5 +57,12 @@ class CookiesController extends Controller
         }
 
         return $output;
+
+    }
+
+    public function vistaCookies($indice = 0){
+
+        return view('cookie', compact('indice'));
+
     }
 }

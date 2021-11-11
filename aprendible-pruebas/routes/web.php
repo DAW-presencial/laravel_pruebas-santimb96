@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Saludar;
 use App\Http\Controllers\CookiesController;
+use App\Http\Controllers\HolaMundo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,10 +40,12 @@ Route::get('saludar/{name?}', function($name='Pepe'){
        'titulo' => strtoupper($titulo)]);
 });
 
-Route::get('hola_mundo', [\App\Http\Controllers\HolaMundo::class, '__invoke']);
+Route::get('hola_mundo', HolaMundo::class);
 
 
 Route::get('cookies/{indice?}', [CookiesController::class, 'obtenerCookies']);
+
+Route::get('vista-view/{indice?}', [CookiesController::class, 'vistaCookies']);
 
 
 

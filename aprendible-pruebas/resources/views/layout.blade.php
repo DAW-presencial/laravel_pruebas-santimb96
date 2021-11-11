@@ -10,11 +10,16 @@
     </style>
 </head>
 <body>
-    <h1>
+{{--    <h1>
         @yield('title')
     </h1>
     <h3>
         @yield('content')
-    </h3>
+    </h3>--}}
+<div>
+    <h2>
+        @yield('cookie')
+    </h2>
+</div>
 </body>
 </html>
