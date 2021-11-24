@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Saludar;
 use App\Http\Controllers\CookiesController;
 use App\Http\Controllers\HolaMundo;
+use App\Http\Controllers\FormController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +49,9 @@ Route::get('cookies/{indice?}', [CookiesController::class, 'obtenerCookies']);
 Route::get('vista-view/{indice?}', [CookiesController::class, 'vistaCookies']);
 
 Route::view('/bienvenido-usuario', 'bienvenido-usuario');
+
+
+Route::get('/form', [FormController::class, 'create']);
 
 
 

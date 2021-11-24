@@ -17,9 +17,10 @@
         @yield('content')
     </h3>--}}
 <div>
-    <h2>
+{{--    <h2>
         @yield('cookie')
-    </h2>
+    </h2>--}}
+    @yield('form')
 </div>
 </body>
 </html>
