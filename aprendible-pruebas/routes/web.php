@@ -47,5 +47,7 @@ Route::get('cookies/{indice?}', [CookiesController::class, 'obtenerCookies']);
 
 Route::get('vista-view/{indice?}', [CookiesController::class, 'vistaCookies']);
 
+Route::view('/bienvenido-usuario', 'bienvenido-usuario');
+
 
 
