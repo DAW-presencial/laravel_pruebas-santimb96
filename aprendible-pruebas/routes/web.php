@@ -51,7 +51,7 @@ Route::get('vista-view/{indice?}', [CookiesController::class, 'vistaCookies']);
 Route::view('/bienvenido-usuario', 'bienvenido-usuario');
 
 
-Route::get('/form', [FormController::class, 'create']);
+Route::get('form/{lang?}', [FormController::class, 'create']);
 
 
 
