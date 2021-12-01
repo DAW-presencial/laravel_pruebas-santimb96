@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('form')
-    <form >
+    <form method="post" action="{{ route('registro')}} ">
+        @csrf
         <label for="nombre">@php echo __('Nombre') @endphp</label>
         <input type="text" id="nombre" name="nombre">
         <label for="apellido1">@lang('Primer apellido')</label>

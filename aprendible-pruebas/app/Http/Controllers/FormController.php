@@ -28,6 +28,8 @@ class FormController extends Controller
 
         App::setLocale($lang);
 
+        session($lang);
+
         return view('form');
     }
 
@@ -39,7 +41,7 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return dd($request);
     }
 
     /**

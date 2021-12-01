@@ -53,5 +53,7 @@ Route::view('/bienvenido-usuario', 'bienvenido-usuario');
 
 Route::get('form/{lang?}', [FormController::class, 'create']);
 
+Route::post('registro', [FormController::class, 'store'])->name('registro');
+
 
 
