@@ -14,7 +14,10 @@ class CreatePersonajeTable extends Migration
     public function up()
     {
         Schema::create('personaje', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id')->unique();
+            $table->string('nombre', 20);
+            $table->integer('edad');
+            $table->string('nacionalidad', 5);
             $table->timestamps();
         });
     }

@@ -13,9 +13,12 @@ class CreatePaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('pais', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('paises', function (Blueprint $table) {
+            $table->char('codigoISO3',3)->primary();
+            $table->char('codigoISO2',2);
+            $table->decimal('cod_numerico', 3, 0);
+            $table->string('nombre', 50);
+            $table->unique('codigoISO2');
         });
     }
 
@@ -26,6 +29,6 @@ class CreatePaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pais');
+        Schema::dropIfExists('paises');
     }
 }
