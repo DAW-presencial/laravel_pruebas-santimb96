@@ -14,17 +14,29 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        Gate::define('rascar',function($user){
+        /**
+         * gate que detecta al usuario loggeado mediante login con breeze
+         */
+        Gate::define('rascar', function($user){
+            return $user;
+        });
+
+        if(Gate::allows('rascar')){
+            return "Bienvenido!";
+        } else {
+            Abort(403);
+        }
+        /*Gate::define('rascar', function ($user) {
             return true;
         });
 
-        if (Gate::allows('rascar')){
+        if (Gate::allows('rascar')) {
 // $this->authorize(‘rascar’,403);
-            abort_unless(Gate::allows('rascar'),403);
+            abort_unless(Gate::allows('rascar'), 403);
             return "hola mundo!";
-}
+        }
 
-        Abort(403);
+        Abort(403);*/
 
     }
 
@@ -41,7 +53,7 @@ class AgendaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,7 +64,7 @@ class AgendaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,7 +75,7 @@ class AgendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -74,8 +86,8 @@ class AgendaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,7 +98,7 @@ class AgendaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
