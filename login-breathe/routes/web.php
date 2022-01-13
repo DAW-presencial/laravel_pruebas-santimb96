@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaisesController;
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('paises', [PaisesController::class, 'index']);
+
+Route::get('check', [AgendaController::class, 'index']);
 
 
