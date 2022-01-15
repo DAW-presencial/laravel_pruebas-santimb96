@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Route::get('hola-mundo', function() {
-    return "Hola mundo!";
-});
+Route::resource('/', UsuarioController::class);
+Route::post('/usuario', [UsuarioController::class, 'store']);
+//Route::get('/crear', [UsuarioController::class, 'create']);
+//Route::get('usuarios', [UsuarioController::class, 'store']);
