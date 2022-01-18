@@ -14,7 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuario = Usuario::all()->toJson();
+        $usuario = Usuario::select('*')->orderBy('id')->get()->toJson();
         $usuario = json_decode($usuario);
 
         //dd($usuario);
