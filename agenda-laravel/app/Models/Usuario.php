@@ -11,4 +11,7 @@ class Usuario extends Model
 
     protected $table = 'usuario';
     protected $primaryKey = 'id';
+
+    protected $fillable = ['nombre', 'numero'];
+    protected $visible = ['id','nombre','numero'];
 }

@@ -19,6 +19,9 @@ use App\Http\Controllers\UsuarioController;
 });*/
 
 Route::resource('/', UsuarioController::class);
-Route::post('/usuario', [UsuarioController::class, 'store']);
+Route::get('edit/{id}', [UsuarioController::class, 'edit']);
+Route::get('delete/{id}', [UsuarioController::class, 'destroy']);
+Route::put('edit/update/{id}', [UsuarioController::class, 'update']);
+//Route::post('/usuario', [UsuarioController::class, 'store']);
 //Route::get('/crear', [UsuarioController::class, 'create']);
 //Route::get('usuarios', [UsuarioController::class, 'store']);

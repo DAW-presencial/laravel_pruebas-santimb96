@@ -14,7 +14,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuario = Usuario::all();
+        $usuario = Usuario::all()->toJson();
+        $usuario = json_decode($usuario);
 
         //dd($usuario);
 
@@ -65,11 +66,15 @@ class UsuarioController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::where('id', $id)->first();
+
+        return view('edit',
+        ['usuario' => $usuario
+        ]);
     }
 
     /**
@@ -77,21 +82,36 @@ class UsuarioController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'numero' => 'required'
+        ]);
+
+        $usuario = Usuario::find($id);
+
+        $usuario->nombre = $request->nombre;
+        $usuario->numero = $request->numero;
+        $usuario->save();
+
+        return redirect('/')->with('Hecho!', 'Contacto actualizado!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {
-        //
+        $usuario = Usuario::where('id', $id)->first();
+
+        $usuario->delete();
+
+        return redirect('/')->with('Hecho!', 'Usuario borrado!');
     }
 }
