@@ -12,6 +12,13 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
+    /**
+     * Si esta autorizado, podra hacerlo tutti; si no, solo mostrara index
+     */
+
+    public function __construct(){
+        $this->middleware('auth', ['except' => ['index']]);
+    }
     public function index()
     {
         $usuario = Usuario::select('*')->orderBy('id')->get()->toJson();
@@ -48,7 +55,7 @@ class UsuarioController extends Controller
         $usuario->numero = $request->input('numero');
         $usuario->save();
 
-        return redirect('/');
+        return redirect('/usuarios');
     }
 
     /**
@@ -97,7 +104,7 @@ class UsuarioController extends Controller
         $usuario->numero = $request->numero;
         $usuario->save();
 
-        return redirect('/')->with('Hecho!', 'Contacto actualizado!');
+        return redirect('/usuarios');
     }
 
     /**
@@ -112,6 +119,6 @@ class UsuarioController extends Controller
 
         $usuario->delete();
 
-        return redirect('/')->with('Hecho!', 'Usuario borrado!');
+        return redirect('/usuarios');
     }
 }

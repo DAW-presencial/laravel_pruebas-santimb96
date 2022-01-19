@@ -14,14 +14,21 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
-Route::resource('/', UsuarioController::class);
-Route::get('edit/{id}', [UsuarioController::class, 'edit']);
-Route::get('delete/{id}', [UsuarioController::class, 'destroy']);
-Route::put('edit/update/{id}', [UsuarioController::class, 'update']);
-//Route::post('/usuario', [UsuarioController::class, 'store']);
-//Route::get('/crear', [UsuarioController::class, 'create']);
-//Route::get('usuarios', [UsuarioController::class, 'store']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::resource('usuarios', UsuarioController::class);
+
+
+/*Route::get('usuarios/create', [UsuarioController::class, 'create']);
+Route::get('usuarios/store', [UsuarioController::class, 'store']);
+Route::get('usuarios/edit/{id}', [UsuarioController::class, 'edit']);
+Route::get('usuarios/delete/{id}', [UsuarioController::class, 'destroy']);
+Route::put('usuarios/update/{id}', [UsuarioController::class, 'update']);*/

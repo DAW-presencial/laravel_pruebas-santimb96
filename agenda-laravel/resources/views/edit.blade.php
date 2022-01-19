@@ -3,7 +3,7 @@
 @section('contenido')
 
 
-    <form action='update/{{ $usuario->id }}' method="post">
+    <form action='/usuarios/{{ $usuario->id }}' method="post">
         @csrf
         @method('put')
         <label for="nombre">NOMBRE</label>

@@ -21,7 +21,7 @@
 <div>
     <h1>AGENDA 2022 LARAVEL</h1>
 
-    <a href="/create">Crear usuario</a>
+    <a href="usuarios/create">Crear usuario</a>
 
     @yield('contenido')
 </div>

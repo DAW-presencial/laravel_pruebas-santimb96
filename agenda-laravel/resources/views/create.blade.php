@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-<form action={{ route('store') }} method="post">
+<form action="/usuarios" method="post">
     @csrf
 
     <label for="nombre">NOMBRE</label>
