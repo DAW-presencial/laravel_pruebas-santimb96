@@ -2,6 +2,10 @@
 
 @section('contenido')
 
+    @php
+        //value="{{ old('nombre', $superheroe->nombre ?? '') }}" old value
+    @endphp
+
     <form action="" method="post">
         <label>NOMBRE
             <input type="text" id="nombre" name="nombre"/>
