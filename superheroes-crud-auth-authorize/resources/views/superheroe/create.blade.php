@@ -6,7 +6,9 @@
         //value="{{ old('nombre', $superheroe->nombre ?? '') }}" old value
     @endphp
 
-    <form action="" method="post">
+    <form action="{{ route('home.store') }}" method="post">
+        @csrf
+        @method('POST')
         <label>NOMBRE
             <input type="text" id="nombre" name="nombre"/>
         </label>
@@ -20,14 +22,14 @@
         </label>
 
         <label>PODERES
-            <input type="checkbox" id="poderes1" name="poderes1" value="VOLAR"/>
-            <input type="checkbox" id="poderes2" name="poderes2" value="RAPIDEZ"/>
-            <input type="checkbox" id="poderes3" name="poderes3" value="SUPERFUERZA"/>
+            <input type="checkbox" id="poderes1" name="poderes" value="VOLAR"/>
+            <input type="checkbox" id="poderes2" name="poderes" value="RAPIDEZ"/>
+            <input type="checkbox" id="poderes3" name="poderes" value="SUPERFUERZA"/>
         </label>
 
         <label>GÉNERO
-            <input type="radio" id="genero1" name="genero1" value="HOMBRE"/>
-            <input type="radio" id="genero2" name="genero2" value="MUJER"/>
+            <input type="radio" id="genero1" name="genero" value="hombre"/>
+            <input type="radio" id="genero2" name="genero" value="mujer"/>
         </label>
 
         <label>DESCRIPCIÓN

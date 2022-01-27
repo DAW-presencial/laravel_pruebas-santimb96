@@ -1,25 +1,13 @@
 <html lang="en">
 <head>
-    <title>AGENDA</title>
-    <style>
-        body{
-            background: #4a5568;
-            color: white;
-            font-family: monospace, sans-serif;
-        }
-        li {
-            list-style: none;
-        }
-        a {
-            color: white;
-        }
-    </style>
+    <title>Superhéroes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <div>
-    <h1>SUPERHÉROES</h1>
+    <h1 class="text-center m-4">SUPERHÉROES</h1>
 
-    <a href="">Crear usuario</a>
+    <a href="{{ route('home.create') }}">Crear superhéroe</a>
 
     @yield('contenido')
 </div>
