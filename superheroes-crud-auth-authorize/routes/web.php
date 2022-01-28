@@ -25,4 +25,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::resource('/home', SuperheroeController::class);
+
+Route::get('/home/create/{lang?}', [SuperheroeController::class, 'create']);
+Route::get('/home/{id}/edit/{lang?}', [SuperheroeController::class, 'edit']);
+
 //Route::resource('home/superheroes', SuperheroeController::class);

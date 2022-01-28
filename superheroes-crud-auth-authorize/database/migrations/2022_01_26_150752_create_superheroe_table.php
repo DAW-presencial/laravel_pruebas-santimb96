@@ -18,7 +18,7 @@ class CreateSuperheroeTable extends Migration
             $table->string('nombre');
             $table->integer('edad');
             $table->date('fecha_nacimiento');
-            $table->string('poderes');
+            $table->json('poderes');
             $table->enum('genero', ['hombre', 'mujer']);
             $table->string('descripcion');
             $table->string('vengador');

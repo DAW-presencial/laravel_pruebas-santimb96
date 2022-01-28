@@ -23,13 +23,23 @@
                 <td>{{ $s->nombre }}</td>
                 <td>{{ $s->edad }}</td>
                 <td>{{ $s->fecha_nacimiento }}</td>
-                <td>{{ $s->poderes }}</td>
+                <td>
+                    <ul class="list-group">
+                        @foreach( json_decode($s->poderes) as $poder)
+                            <li class="list-group-item list-group-item-dark"> {{ $poder }} </li>
+                        @endforeach
+                    </ul>
+                </td>
                 <td>{{ $s->genero }}</td>
                 <td>{{ $s->descripcion }}</td>
                 <td>{{ $s->vengador }}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ route('home.edit', $s->id) }}">Editar</a>
-                    <a class="btn btn-danger" href="{{ route('home.destroy', $s->id) }}">Borrar</a>
+                    <form action="{{ route('home.destroy', $s->id) }}" method="post">
+                        <a class="btn btn-success" href="{{ route('home.edit', $s->id) }}">Editar</a>
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

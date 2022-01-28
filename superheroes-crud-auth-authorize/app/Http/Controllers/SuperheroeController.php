@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Superheroe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class SuperheroeController extends Controller
 {
@@ -32,8 +33,11 @@ class SuperheroeController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create()
+    public function create($lang = 'es')
     {
+        App::setLocale($lang);
+        session($lang);
+
         return view('superheroe.create');
     }
 
@@ -67,10 +71,14 @@ class SuperheroeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Superheroe  $superheroe
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'es')
     {
+        App::setLocale($lang);
+
+        session($lang);
+
         $superheroe = Superheroe::where('id', $id)->first();
 
         return view('superheroe.edit', ['superheroe'=>$superheroe]);
@@ -81,7 +89,7 @@ class SuperheroeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Superheroe  $superheroe
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -116,7 +124,7 @@ class SuperheroeController extends Controller
         $superheroe->nombre = $request->input('nombre');
         $superheroe->edad = $request->input('edad');
         $superheroe->fecha_nacimiento = $request->input('fecha_nacimiento');
-        $superheroe->poderes = $request->input('poderes');
+        $superheroe->poderes = json_encode($request->input('poderes'));
         $superheroe->genero = $request->input('genero');
         $superheroe->descripcion = $request->input('descripcion');
         $superheroe->vengador = $request->input('vengador');

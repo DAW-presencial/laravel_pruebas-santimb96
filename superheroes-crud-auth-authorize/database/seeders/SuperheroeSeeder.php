@@ -27,7 +27,7 @@ class SuperheroeSeeder extends Seeder
             'nombre'=> 'Spiderman',
             'edad'=> 23,
             'fecha_nacimiento' => Carbon::parse('1999-01-01'),
-            'poderes'=> 'SUPERFUERZA',
+            'poderes'=> json_encode(['superfuerza', 'rapidez']),
             'genero' => 'hombre',
             'descripcion' => 'El hombre araña',
             'vengador' => "SI"
@@ -37,7 +37,7 @@ class SuperheroeSeeder extends Seeder
             'nombre'=> 'Thor',
             'edad'=> 500,
             'fecha_nacimiento' => Carbon::parse('1400-01-01'),
-            'poderes'=> 'SUPERFUERZA',
+            'poderes'=> json_encode(['superfuerza']),
             'genero' => 'hombre',
             'descripcion' => 'Dios del trueno',
             'vengador' => "SI"

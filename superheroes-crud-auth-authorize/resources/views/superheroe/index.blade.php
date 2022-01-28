@@ -23,7 +23,13 @@
                 <td>{{ $s->nombre }}</td>
                 <td>{{ $s->edad }}</td>
                 <td>{{ $s->fecha_nacimiento }}</td>
-                <td>{{ $s->poderes }}</td>
+                <td>
+                    <ul class="list-group">
+                        @foreach( json_decode($s->poderes) as $poder)
+                        <li class="list-group-item list-group-item-dark"> {{ $poder }} </li>
+                        @endforeach
+                    </ul>
+                </td>
                 <td>{{ $s->genero }}</td>
                 <td>{{ $s->descripcion }}</td>
                 <td>{{ $s->vengador }}</td>
@@ -35,7 +41,6 @@
                         @method('delete')
                     <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
-
                 </td>
             </tr>
         @endforeach
