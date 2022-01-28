@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-    <table class="table">
+    <table class="table table-dark table-hover">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -28,9 +28,14 @@
                 <td>{{ $s->descripcion }}</td>
                 <td>{{ $s->vengador }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('home.show', $s->id) }}">Mostrar</a>
-                    <a class="btn btn-primary" href="{{ route('home.edit', $s->id) }}">Editar</a>
-                    <a class="btn btn-danger" href="{{ route('home.destroy', $s->id) }}">Borrar</a>
+                    <form action="{{ route('home.destroy', $s->id) }}" method="post">
+                        <a class="btn btn-info" href="{{ route('home.show', $s->id) }}">Mostrar</a>
+                        <a class="btn btn-success" href="{{ route('home.edit', $s->id) }}">Editar</a>
+                        @csrf
+                        @method('delete')
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+
                 </td>
             </tr>
         @endforeach

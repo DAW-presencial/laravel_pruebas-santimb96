@@ -47,16 +47,7 @@ class SuperheroeController extends Controller
     {
         $superheroe = new Superheroe;
 
-        $superheroe->nombre = $request->input('nombre');
-        $superheroe->edad = $request->input('edad');
-        $superheroe->fecha_nacimiento = $request->input('fecha_nacimiento');
-        $superheroe->poderes = $request->input('poderes');
-        $superheroe->genero = $request->input('genero');
-        $superheroe->descripcion = $request->input('descripcion');
-        $superheroe->vengador = $request->input('vengador');
-        $superheroe->save();
-
-        return redirect()->route('home.index');
+        return $this->extracted($request, $superheroe);
     }
 
     /**
@@ -65,9 +56,11 @@ class SuperheroeController extends Controller
      * @param  \App\Models\Superheroe  $superheroe
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show(Superheroe $superheroe)
+    public function show($id)
     {
-        //
+        $superheroe = Superheroe::where('id', $id)->get();
+
+        return view('superheroe.show', ['superheroe'=>$superheroe]);
     }
 
     /**
@@ -76,9 +69,11 @@ class SuperheroeController extends Controller
      * @param  \App\Models\Superheroe  $superheroe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Superheroe $superheroe)
+    public function edit($id)
     {
-        //
+        $superheroe = Superheroe::where('id', $id)->first();
+
+        return view('superheroe.edit', ['superheroe'=>$superheroe]);
     }
 
     /**
@@ -88,9 +83,12 @@ class SuperheroeController extends Controller
      * @param  \App\Models\Superheroe  $superheroe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Superheroe $superheroe)
+    public function update(Request $request, $id)
     {
-        //
+        $superheroe = Superheroe::find($id);
+
+
+        return $this->extracted($request, $superheroe);
     }
 
     /**
@@ -104,6 +102,25 @@ class SuperheroeController extends Controller
         $superheroe = Superheroe::find($id);
 
         $superheroe->delete();
+
+        return redirect()->route('home.index');
+    }
+
+    /**
+     * @param Request $request
+     * @param $superheroe
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function extracted(Request $request, $superheroe): \Illuminate\Http\RedirectResponse
+    {
+        $superheroe->nombre = $request->input('nombre');
+        $superheroe->edad = $request->input('edad');
+        $superheroe->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $superheroe->poderes = $request->input('poderes');
+        $superheroe->genero = $request->input('genero');
+        $superheroe->descripcion = $request->input('descripcion');
+        $superheroe->vengador = $request->input('vengador');
+        $superheroe->save();
 
         return redirect()->route('home.index');
     }

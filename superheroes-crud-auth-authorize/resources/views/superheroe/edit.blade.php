@@ -7,9 +7,9 @@
     @endphp
 
     <div class="container d-flex justify-content-center align-items-center">
-        <form class="m-4" action="{{ route('home.store') }}" method="post">
+        <form class="m-4" action="{{ route('home.update', $superheroe->id) }}" method="post">
             @csrf
-            @method('POST')
+            @method('put')
             <div class="mb-3">
                 <label class="form-label">NOMBRE
                     <input class="form-control" type="text" id="nombre" name="nombre"/>
