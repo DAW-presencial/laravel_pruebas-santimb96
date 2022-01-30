@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SuperheroeRequest;
 use App\Models\Superheroe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -47,7 +48,7 @@ class SuperheroeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(SuperheroeRequest $request)
     {
         $superheroe = new Superheroe;
 
@@ -93,6 +94,15 @@ class SuperheroeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nombre'=>'required|min:3',
+            'edad'=>'required',
+            'fecha_nacimiento'=>'required',
+            'poderes'=>'required',
+            'genero'=>'required',
+            'descripcion'=>'required|min:20',
+        ]);
+
         $superheroe = Superheroe::find($id);
 
 

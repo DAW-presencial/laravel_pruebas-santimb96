@@ -5,25 +5,44 @@
     @php
         //value="{{ old('nombre', $superheroe->nombre ?? '') }}" old value
     @endphp
+    @if($errors->any())
+        <div class="d-flex justify-content-center align-items-center full-width">
+            <table class="table table-dark table-hover text-danger text-center">
+                <thead>
+                <tr>
+                    <th scope="col">Errores</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($errors->all() as $e)
+                    <tr>
+                        <th>{{ $e }}</th>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
 
     <div class="container d-flex justify-content-center align-items-center">
-        <form class="m-4" action="{{ route('home.update', $superheroe->id) }}" method="post">
+        <form class="m-4 text-center" action="{{ route('home.update', $superheroe->id) }}" method="post">
             @csrf
             @method('put')
+            <h4 class="m-4">Estás editando a: {{ $superheroe->nombre }}</h4>
             <div class="mb-3">
                 <label class="form-label">@lang('NOMBRE')
-                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}"/>
+                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required/>
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">@lang('EDAD')
-                    <input class="form-control" type="number" id="edad" name="edad" value="{{ old('edad') }}"/>
+                    <input class="form-control" type="number" id="edad" name="edad" value="{{ old('edad') }}" required/>
                 </label>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">@lang('FECHA DE NACIMIENTO')
-                    <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}"/>
+                    <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required/>
                 </label>
             </div>
 
@@ -55,7 +74,7 @@
 
             <div class="mb-3">
                 <label class="form-label">@lang('DESCRIPCIÓN')
-                    <textarea class="form-control" id="descripcion" name="descripcion">{{ old('descripcion') }}</textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" required>{{ old('descripcion') }}</textarea>
                 </label>
             </div>
 
