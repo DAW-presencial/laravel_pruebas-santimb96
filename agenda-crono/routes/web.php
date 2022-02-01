@@ -25,3 +25,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::resource('agenda', AgendaCronoController::class);
+
+
+Route::get('/agenda/create/{lang?}', [AgendaCronoController::class, 'create']);
+Route::get('/agenda/{id}/edit/{lang?}', [AgendaCronoController::class, 'edit']);
+

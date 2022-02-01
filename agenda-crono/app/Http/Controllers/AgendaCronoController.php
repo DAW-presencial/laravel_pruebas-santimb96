@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AgendaCrono;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class AgendaCronoController extends Controller
 {
@@ -27,8 +28,10 @@ class AgendaCronoController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create()
+    public function create($lang = 'es')
     {
+        App::setLocale($lang);
+        session($lang);
         return view('agenda.create');
     }
 
@@ -73,8 +76,11 @@ class AgendaCronoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'es')
     {
+        App::setLocale($lang);
+        session($lang);
+
         $contacto = AgendaCrono::where('id', $id)->first();
         return view('agenda.edit', [
             'contacto'=>$contacto
