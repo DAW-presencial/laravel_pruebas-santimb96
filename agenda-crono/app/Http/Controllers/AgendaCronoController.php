@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AgendaCronoRequest;
 use App\Models\AgendaCrono;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -41,7 +42,7 @@ class AgendaCronoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(AgendaCronoRequest $request)
     {
         $contacto = new AgendaCrono;
 
@@ -94,8 +95,15 @@ class AgendaCronoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(AgendaCronoRequest $request, $id)
     {
+        /*$request->validate([
+            'nombre'=>'required|min:3',
+            'edad'=>'required',
+            'genero'=>'required',
+            'fdn'=>'required'
+        ]);*/ //NO HACE FALTA USARLO
+
         $contacto = AgendaCrono::find($id);
 
         //$contacto = new AgendaCrono;

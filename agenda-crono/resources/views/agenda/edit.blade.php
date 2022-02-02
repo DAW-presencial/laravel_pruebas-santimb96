@@ -1,7 +1,7 @@
 @extends('agenda.layout')
 
 @section('contenido')
-    {{--    @if($errors->any())
+        @if($errors->any())
             <div class="d-flex justify-content-center align-items-center full-width">
                 <table class="table table-dark table-hover text-danger text-center">
                     <thead>
@@ -18,7 +18,7 @@
                     </tbody>
                 </table>
             </div>
-        @endif--}}
+        @endif
 
     <div class="container d-flex justify-content-center align-items-center">
 
