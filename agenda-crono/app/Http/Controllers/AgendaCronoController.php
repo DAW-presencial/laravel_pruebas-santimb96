@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AgendaCronoRequest;
 use App\Models\AgendaCrono;
+use App\Policies\AgendaCronoPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -16,11 +17,14 @@ class AgendaCronoController extends Controller
      */
     public function index()
     {
+        //AgendaCronoPolicy::class->authorize('create', $newAgenda = new AgendaCrono);
+
         $contacto = AgendaCrono::select('*')->orderBy('id')->get()->toJson();
         $contacto = json_decode($contacto);
 
         return view('agenda.index', [
-            'contacto'=>$contacto
+            'contacto'=>$contacto,
+            'newAgenda'=> new AgendaCrono
         ]);
     }
 
@@ -31,9 +35,12 @@ class AgendaCronoController extends Controller
      */
     public function create($lang = 'es')
     {
+        $this->authorize('create', $newAgenda = new AgendaCrono);
         App::setLocale($lang);
         session($lang);
-        return view('agenda.create');
+        return view('agenda.create', [
+            'newAgenda'=>$newAgenda
+        ]);
     }
 
     /**

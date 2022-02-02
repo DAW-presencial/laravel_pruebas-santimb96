@@ -1,5 +1,6 @@
 @extends('agenda.layout')
 
+@can('create', $newAgenda)
 @section('contenido')
     @if($errors->any())
         <div class="d-flex justify-content-center align-items-center full-width">
@@ -58,3 +59,4 @@
         </form>
     </div>
 @endsection
+@endcan

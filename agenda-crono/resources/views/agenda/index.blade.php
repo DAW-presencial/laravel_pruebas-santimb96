@@ -1,7 +1,9 @@
 @extends('agenda.layout')
 
 @section('contenido')
-
+    @can('create', $newAgenda)
+    <button class="btn btn-success m-2" onclick="location.href = '{{ route('agenda.create') }}'">Crear</button>
+    @endcan
     <table class="table table-dark table-hover">
         <thead>
         <tr>

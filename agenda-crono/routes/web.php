@@ -30,3 +30,7 @@ Route::resource('agenda', AgendaCronoController::class);
 Route::get('/agenda/create/{lang?}', [AgendaCronoController::class, 'create']);
 Route::get('/agenda/{id}/edit/{lang?}', [AgendaCronoController::class, 'edit']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" style="height: 60%; width: 30%;"/>
             </a>
         </x-slot>
 
@@ -44,6 +44,15 @@
                                 type="password"
                                 name="password_confirmation" required />
             </div>
+
+                <div class="mt-4">
+                    <x-label for="role" :value="__('Role')" />
+
+                    <select name="role" id="role" class="block mt-1 w-full">
+                        <option name="role" value="Admin">Admin</option>
+                        <option name="role" value="User">User</option>
+                    </select>
+                </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

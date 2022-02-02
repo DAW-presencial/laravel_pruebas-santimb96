@@ -21,7 +21,7 @@
         @endif
     @endif--}}
 
-    <button class="btn btn-success m-2" onclick="location.href = '{{ route('agenda.create') }}'">Crear</button>
+    <button class="btn btn-success m-2" onclick="location.href = '{{ route('agenda.index') }}'">Home</button>
     @yield('contenido')
 </div>
 </body>
