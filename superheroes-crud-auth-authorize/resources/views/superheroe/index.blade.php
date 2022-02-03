@@ -26,7 +26,7 @@
                 <td>
                     <ul class="list-group">
                         @foreach( json_decode($s->poderes) as $poder)
-                        <li class="list-group-item list-group-item-dark"> {{ $poder }} </li>
+                            <li class="list-group-item list-group-item-dark"> {{ $poder }} </li>
                         @endforeach
                     </ul>
                 </td>
@@ -35,11 +35,20 @@
                 <td>{{ $s->vengador }}</td>
                 <td>
                     <form action="{{ route('home.destroy', $s->id) }}" method="post">
-                        <a class="btn btn-info" href="{{ route('home.show', $s->id) }}">Mostrar</a>
-                        <a class="btn btn-success" href="{{ route('home.edit', $s->id) }}">Editar</a>
-                        @csrf
-                        @method('delete')
-                    <button type="submit" class="btn btn-danger">Borrar</button>
+                        @auth
+                            <a class="btn btn-info" href="{{ route('home.show', $s->id) }}">Mostrar</a>
+                        @endauth
+                        @guest
+                            <p class="text-danger">Loggueate!</p>
+                        @endguest
+                            @if( auth()->check())
+                                @if( auth()->user()->isAdmin())
+                            <a class="btn btn-success" href="{{ route('home.edit', $s->id) }}">Editar</a>
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            @endif
+                        @endif
                     </form>
                 </td>
             </tr>

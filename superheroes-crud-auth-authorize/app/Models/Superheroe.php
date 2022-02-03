@@ -16,4 +16,6 @@ class Superheroe extends Model
     protected $fillable = ['nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador'];
 
     protected $visible = ['id','nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador'];
+
+
 }

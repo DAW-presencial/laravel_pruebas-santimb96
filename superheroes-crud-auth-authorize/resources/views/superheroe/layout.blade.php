@@ -16,8 +16,11 @@
         <button class="btn btn-primary m-2" onclick="location.href = '{{ route('home.index') }}'">Home</button>
     @endif
 
-    <button class="btn btn-success m-2" onclick="location.href = '{{ route('home.create') }}'">Crear</button>
-
+    @if( auth()->check() )
+        @if( auth()->user()->isAdmin() )
+            <button class="btn btn-success m-2" onclick="location.href = '{{ route('home.create') }}'">Crear</button>
+        @endif
+    @endif
     @yield('contenido')
 </div>
 </body>

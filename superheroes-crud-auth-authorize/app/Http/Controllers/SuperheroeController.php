@@ -9,20 +9,19 @@ use Illuminate\Support\Facades\App;
 
 class SuperheroeController extends Controller
 {
-    /*public function __construct(){
-        $this->middleware('auth', ['except' => ['index']]);
-    }*/
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Auth\Access\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+
     public function index()
     {
         $superheroe = Superheroe::select('*')->orderBy('id')->get()->toJson();
         $superheroe = json_decode($superheroe);
 
         //dd($usuario);
+        //$this->authorize('create', $newHeroe = new Superheroe);
 
         return view('superheroe.index', [
             'superheroe' => $superheroe
@@ -39,7 +38,12 @@ class SuperheroeController extends Controller
         App::setLocale($lang);
         session($lang);
 
-        return view('superheroe.create');
+        //nombre de la POLICY
+        $this->authorize('create', $newHeroe = new Superheroe);
+
+        return view('superheroe.create',[
+            'superheroe'=>$newHeroe
+        ]);
     }
 
     /**
@@ -80,9 +84,12 @@ class SuperheroeController extends Controller
 
         session($lang);
 
+        $this->authorize('update', $newHeroe = new Superheroe);
+
         $superheroe = Superheroe::where('id', $id)->first();
 
-        return view('superheroe.edit', ['superheroe'=>$superheroe]);
+        return view('superheroe.edit', ['superheroe'=>$superheroe,
+            'newHeroe'=>$newHeroe]);
     }
 
     /**
@@ -103,6 +110,7 @@ class SuperheroeController extends Controller
             'descripcion'=>'required|min:20',
         ]);
 
+
         $superheroe = Superheroe::find($id);
 
 
@@ -118,6 +126,8 @@ class SuperheroeController extends Controller
     public function destroy($id)
     {
         $superheroe = Superheroe::find($id);
+
+        $this->authorize('delete', new Superheroe);
 
         $superheroe->delete();
 
