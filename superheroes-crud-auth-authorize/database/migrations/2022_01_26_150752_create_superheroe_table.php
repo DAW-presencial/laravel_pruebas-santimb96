@@ -14,7 +14,7 @@ class CreateSuperheroeTable extends Migration
     public function up()
     {
         Schema::create('superheroe', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombre');
             $table->integer('edad');
             $table->date('fecha_nacimiento');
@@ -23,6 +23,10 @@ class CreateSuperheroeTable extends Migration
             $table->string('descripcion');
             $table->string('vengador');
             $table->timestamps();
+            //manera de referenciar foreingKey
+            //$table->foreign('id')->references('id')->on('multiverso');
+            $table->integer('vehiculo_id')->unsigned();
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculo');
         });
     }
 

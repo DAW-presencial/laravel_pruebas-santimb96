@@ -13,9 +13,11 @@ class Superheroe extends Model
 
     protected $primaryKey= 'id';
 
-    protected $fillable = ['nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador'];
+    protected $fillable = ['nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador', 'vehiculo_id'];
 
-    protected $visible = ['id','nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador'];
+    protected $visible = ['id','nombre', 'edad', 'fecha_nacimiento', 'poderes','genero','descripcion', 'vengador', 'vehiculo_id'];
 
-
+    public function vehiculo(){
+        return $this->hasOne(Vehiculo::class, 'vehiculo_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SuperheroeRequest;
 use App\Models\Superheroe;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -20,10 +21,13 @@ class SuperheroeController extends Controller
         $superheroe = Superheroe::select('*')->orderBy('id')->get()->toJson();
         $superheroe = json_decode($superheroe);
 
+
+
+
         //dd($usuario);
         //$this->authorize('create', $newHeroe = new Superheroe);
 
-        return view('superheroe.index', [
+     return view('superheroe.index', [
             'superheroe' => $superheroe
         ]);
     }
@@ -148,6 +152,7 @@ class SuperheroeController extends Controller
         $superheroe->genero = $request->input('genero');
         $superheroe->descripcion = $request->input('descripcion');
         $superheroe->vengador = $request->input('vengador');
+        $superheroe->vehiculo_id = 1;
         $superheroe->save();
 
         return redirect()->route('home.index');

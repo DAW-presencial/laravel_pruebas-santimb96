@@ -32,7 +32,8 @@ class SuperheroeSeeder extends Seeder
             'poderes'=> json_encode(['superfuerza', 'rapidez']),
             'genero' => 'hombre',
             'descripcion' => 'El hombre araña',
-            'vengador' => "SI"
+            'vengador' => "SI",
+            'vehiculo_id' => 1
         ]);
 
         DB::table('superheroe')->insert([
@@ -42,7 +43,8 @@ class SuperheroeSeeder extends Seeder
             'poderes'=> json_encode(['superfuerza']),
             'genero' => 'hombre',
             'descripcion' => 'Dios del trueno',
-            'vengador' => "SI"
+            'vengador' => "SI",
+            'vehiculo_id' => 2
         ]);
 
         //ELOQUENT
@@ -56,13 +58,14 @@ class SuperheroeSeeder extends Seeder
         $superheroe->genero = 'hombre';
         $superheroe->descripcion = 'Un buen villano';
         $superheroe->vengador = 'SI';
+        $superheroe->vehiculo_id = 3;
         $superheroe->save();
 
         //RAW (SQL BASIC INSERT)
 
         $poderesBatman = json_encode(['superfuerza', 'rapidez']);
 
-        DB::unprepared("insert into superheroe (nombre, edad, fecha_nacimiento, poderes, genero, descripcion, vengador)
-        values('Batman', 23, '1999-01-01', '$poderesBatman' , 'hombre', 'Un tío rico', 'NO')");
+        DB::unprepared("insert into superheroe (nombre, edad, fecha_nacimiento, poderes, genero, descripcion, vengador, vehiculo_id)
+        values('Batman', 23, '1999-01-01', '$poderesBatman' , 'hombre', 'Un tío rico', 'NO', 4)");
     }
 }

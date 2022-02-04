@@ -13,6 +13,7 @@
             <th scope="col">GÉNERO</th>
             <th scope="col">DESCRIPCIÓN</th>
             <th scope="col">VENGADOR</th>
+            <th scope="col">VEHICULO_ID</th>
             <th scope="col">OPCIONES</th>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{ $s->genero }}</td>
                 <td>{{ $s->descripcion }}</td>
                 <td>{{ $s->vengador }}</td>
+                <td>{{ $s->id }}</td>
                 <td>
                     <form action="{{ route('home.destroy', $s->id) }}" method="post">
                         @auth

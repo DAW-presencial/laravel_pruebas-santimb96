@@ -31,18 +31,18 @@
             <h4 class="m-4">Estás editando a: {{ $superheroe->nombre }}</h4>
             <div class="mb-3">
                 <label class="form-label">@lang('NOMBRE')
-                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required/>
+                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ old('nombre', $superheroe->nombre ?? '') }}" required/>
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">@lang('EDAD')
-                    <input class="form-control" type="number" id="edad" name="edad" value="{{ old('edad') }}" required/>
+                    <input class="form-control" type="number" id="edad" name="edad" value="{{ old('edad', $superheroe->edad ?? '') }}" required/>
                 </label>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">@lang('FECHA DE NACIMIENTO')
-                    <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required/>
+                    <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento', $superheroe->fecha_nacimiento ?? '') }}" required/>
                 </label>
             </div>
 
@@ -65,24 +65,24 @@
                 <div class="mb-3">
                     <label for="genero1" class="form-check-label">@lang('HOMBRE')</label>
                     <input type="radio" id="genero1" name="genero" value="hombre"
-                    {{ old('genero') == 'hombre' ? 'checked': '' }}/>
+                    {{ $superheroe->genero == 'hombre' ? 'checked': '' }}/>
                     <label for="genero2" class="form-check-label">@lang('MUJER')</label>
                     <input type="radio" id="genero2" name="genero" value="mujer"
-                        {{ old('genero') == 'mujer' ? 'checked': '' }}/>
+                        {{ $superheroe->genero == 'mujer' ? 'checked': '' }}/>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">@lang('DESCRIPCIÓN')
-                    <textarea class="form-control" id="descripcion" name="descripcion" required>{{ old('descripcion') }}</textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" required>{{ old('descripcion', $superheroe->descripcion ?? '') }}</textarea>
                 </label>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">@lang('VENGADOR')
                     <select name="vengador" id="vengador">
-                        <option value="si" {{ old('vengador') == 'si' ? 'selected': '' }}>@lang('SÍ')</option>
-                        <option value="no" {{ old('vengador') == 'no' ? 'selected': '' }}>@lang('NO')</option>
+                        <option value="si" {{ $superheroe->vengador == 'si' ? 'selected': '' }}>@lang('SÍ')</option>
+                        <option value="no" {{ $superheroe->vengador == 'no' ? 'selected': '' }}>@lang('NO')</option>
                     </select>
                 </label>
             </div>
