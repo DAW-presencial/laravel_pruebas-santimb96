@@ -14,4 +14,8 @@ class Pokemon extends Model
 
     protected $fillable = ['nombre', 'nivel', 'fecha_capturado', 'tipo', 'genero', 'descripcion', 'shiny', 'user_id'];
     protected $visible = ['id','nombre', 'nivel', 'fecha_capturado', 'tipo', 'genero', 'descripcion', 'shiny', 'user_id'];
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }
