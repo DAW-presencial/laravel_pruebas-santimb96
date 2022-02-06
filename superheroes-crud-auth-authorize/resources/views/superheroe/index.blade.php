@@ -6,13 +6,8 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">IMG</th>
             <th scope="col">NOMBRE</th>
-            <th scope="col">EDAD</th>
-            <th scope="col">FECHA DE NACIMIENTO</th>
-            <th scope="col">PODERES</th>
-            <th scope="col">GÉNERO</th>
-            <th scope="col">DESCRIPCIÓN</th>
-            <th scope="col">VENGADOR</th>
             <th scope="col">VEHICULO_ID</th>
             <th scope="col">OPCIONES</th>
         </tr>
@@ -21,20 +16,9 @@
         @foreach( $superheroe as $s)
             <tr>
                 <th scope="row">{{ $s->id }}</th>
+                <th><img src="{{ asset('/storage/image/'.$s->fichero) }}" alt="superheroe" style="width: 40px; height: 50px;"></th>
                 <td>{{ $s->nombre }}</td>
-                <td>{{ $s->edad }}</td>
-                <td>{{ $s->fecha_nacimiento }}</td>
-                <td>
-                    <ul class="list-group">
-                        @foreach( json_decode($s->poderes) as $poder)
-                            <li class="list-group-item list-group-item-dark"> {{ $poder }} </li>
-                        @endforeach
-                    </ul>
-                </td>
-                <td>{{ $s->genero }}</td>
-                <td>{{ $s->descripcion }}</td>
-                <td>{{ $s->vengador }}</td>
-                <td>{{ $s->id }}</td>
+                <td>{{ $s->vehiculo_id }}</td>
                 <td>
                     <form action="{{ route('home.destroy', $s->id) }}" method="post">
                         @auth
