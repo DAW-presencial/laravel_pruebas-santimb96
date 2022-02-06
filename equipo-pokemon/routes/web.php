@@ -25,3 +25,5 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::resource('pokemons', PokemonController::class);
+Route::get('pokemons/create/{lang?}', [PokemonController::class, 'create']);
+Route::get('pokemons/{id}/edit/{lang?}', [PokemonController::class, 'edit']);

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PokemonRequest;
 use App\Models\Pokemon;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PokemonController extends Controller
 {
@@ -30,9 +33,25 @@ class PokemonController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create()
+    public function create($lang = 'es')
     {
-        return view('pokemon.create');
+        App::setLocale($lang);
+        session($lang);
+
+
+           //dd(Auth::user());
+
+           if(Auth::user() || Auth::user() !== null){
+               if(Auth::user()->role == 'admin'){
+                   return view('pokemon.create');
+               } else {
+                   abort(401);
+               }
+           } else {
+               abort(401);
+           }
+
+        //return view('pokemon.create');
     }
 
     /**
@@ -43,6 +62,12 @@ class PokemonController extends Controller
      */
     public function store(PokemonRequest $request)
     {
+        //dd($request->file('fichero')->getClientOriginalName());
+
+        if($request->hasFile('fichero')) {
+            $nombre_fichero = $request->file('fichero')->getClientOriginalName();
+            $request->file('fichero')->storeAs('public/image', $nombre_fichero);
+
         $pokemon = new Pokemon;
 
         $pokemon->nombre = $request->input('nombre');
@@ -53,9 +78,11 @@ class PokemonController extends Controller
         $pokemon->descripcion = $request->input('descripcion');
         $pokemon->shiny = $request->input('shiny');
         $pokemon->user_id = Auth::user()->id;
+        $pokemon->fichero = $nombre_fichero;
         $pokemon->save();
 
         return redirect()->route('pokemons.index');
+        }
     }
 
     /**
@@ -79,13 +106,23 @@ class PokemonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'es')
     {
-        $pokemon = Pokemon::where('id', $id)->first();
 
-        return view('pokemon.edit', [
-            'pokemon'=>$pokemon
-        ]);
+        App::setLocale($lang);
+        session($lang);
+
+        if(Auth::user() || Auth::user() !== null){
+            if(Auth::user()->role == 'admin'){
+                $pokemon = Pokemon::where('id', $id)->first();
+                return view('pokemon.edit', compact('pokemon'));
+            } else {
+                abort(401);
+            }
+        } else {
+            abort(401);
+        }
+
     }
 
     /**
@@ -98,19 +135,27 @@ class PokemonController extends Controller
     public function update(PokemonRequest $request, $id)
     {
 
-        $pokemon = Pokemon::find($id);
 
-        $pokemon->nombre = $request->input('nombre');
-        $pokemon->nivel = $request->input('nivel');
-        $pokemon->fecha_capturado = $request->input('fecha_capturado');
-        $pokemon->tipo = json_encode($request->input('tipo'));
-        $pokemon->genero = $request->input('genero');
-        $pokemon->descripcion = $request->input('descripcion');
-        $pokemon->shiny = $request->input('shiny');
-        $pokemon->user_id = Auth::user()->id;
-        $pokemon->save();
+        if ($request->hasFile('fichero')) {
+            $nombre_fichero = $request->file('fichero')->getClientOriginalName();
+            $request->file('fichero')->storeAs('public/image', $nombre_fichero);
 
-        return redirect()->route('pokemons.index');
+
+            $pokemon = Pokemon::find($id);
+
+            $pokemon->nombre = $request->input('nombre');
+            $pokemon->nivel = $request->input('nivel');
+            $pokemon->fecha_capturado = $request->input('fecha_capturado');
+            $pokemon->tipo = json_encode($request->input('tipo'));
+            $pokemon->genero = $request->input('genero');
+            $pokemon->descripcion = $request->input('descripcion');
+            $pokemon->shiny = $request->input('shiny');
+            $pokemon->user_id = Auth::user()->id;
+            $pokemon->fichero = $nombre_fichero;
+            $pokemon->save();
+
+            return redirect()->route('pokemons.index');
+        }
     }
 
     /**
@@ -121,10 +166,16 @@ class PokemonController extends Controller
      */
     public function destroy($id)
     {
-        $pokemon = Pokemon::find($id);
-
-        $pokemon->delete();
-
-        return redirect()->route('pokemons.index');
+        if(Auth::user() || Auth::user() !== null){
+            if(Auth::user()->role){
+                $pokemon = Pokemon::find($id);
+                $pokemon->delete();
+                return redirect()->route('pokemons.index');
+            } else {
+                abort(401);
+            }
+        } else {
+            abort(401);
+        }
     }
 }

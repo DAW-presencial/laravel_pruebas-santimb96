@@ -7,6 +7,26 @@
 
 <body class="bg-dark text-light">
 <div>
+    <form action="{{ route('register') }}" method="get">
+        @csrf
+        <button type="submit" class="btn btn-success">
+            Register
+        </button>
+    </form>
+    <form action="{{ route('login') }}" method="get">
+        @csrf
+        <button type="submit" class="btn btn-primary">
+            Login
+        </button>
+    </form>
+    @if(Auth::user() !== null)
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout
+        </button>
+    </form>
+    @endif
+
     <div class="container d-flex justify-content-center align-items-center mt-4 mb-4">
         <!--<img src="{{ URL::asset('/assets/marvel.png') }}" alt="marvel" style="width: 100px; height: 100px;"/>-->
         <h1 class="text-center m-4">POKÉMONS</h1>

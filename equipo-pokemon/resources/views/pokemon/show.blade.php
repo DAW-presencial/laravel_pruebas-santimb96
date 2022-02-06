@@ -33,10 +33,14 @@
                 <td>{{ $p->shiny ? 'SÍ': 'NO' }}</td>
                 <td>
                     <form action="{{ route('pokemons.destroy', $p->id) }}" method="post">
-                        <a class="btn btn-success" href="{{ route('pokemons.edit', $p->id) }}">Editar</a>
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
+                        @can('isAdmin')
+                            <a class="btn btn-success" href="{{ route('pokemons.edit', $p->id) }}">Editar</a>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                        @else
+                            <a class="btn btn-primary" href="{{ route('login') }}">Login</a>
+                        @endcan
                     </form>
                 </td>
             </tr>
