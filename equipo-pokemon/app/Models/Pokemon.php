@@ -16,6 +16,6 @@ class Pokemon extends Model
     protected $visible = ['id','nombre', 'nivel', 'fecha_capturado', 'tipo', 'genero', 'descripcion', 'shiny', 'user_id', 'fichero'];
 
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }

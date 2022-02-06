@@ -107,10 +107,15 @@ class PokemonController extends Controller
     public function show($id)
     {
         $pokemon = Pokemon::where('id', $id)->get();
+        $currentPokemon = Pokemon::find($id);
+        $user = $currentPokemon->users;
 
-        return view ('pokemon.show', [
-            'pokemon'=>$pokemon
-        ]);
+
+
+                return view ('pokemon.show', [
+                    'pokemon'=>$pokemon,
+                    'user'=>$user
+                ]);
     }
 
     /**

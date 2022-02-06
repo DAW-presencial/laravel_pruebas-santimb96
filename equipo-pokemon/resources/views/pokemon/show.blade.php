@@ -11,6 +11,7 @@
             <th scope="col">GÉNERO</th>
             <th scope="col">DESCRIPCIÓN</th>
             <th scope="col">SHINY</th>
+            <th scope="col">ENTRENADOR</th>
             <th scope="col">OPCIONES</th>
         </tr>
         </thead>
@@ -31,6 +32,13 @@
                 <td>{{ $p->genero }}</td>
                 <td>{{ $p->descripcion }}</td>
                 <td>{{ $p->shiny ? 'SÍ': 'NO' }}</td>
+                <td>
+                    <ul>
+                        <li class="list-group-item list-group-item-dark">NOMBRE: {{ $user->name }} </li>
+                        <li class="list-group-item list-group-item-dark">EMAIL: {{ $user->email }} </li>
+                        <li class="list-group-item list-group-item-dark">ROL: {{ $user->role }} </li>
+                    </ul>
+                </td>
                 <td>
                     <form action="{{ route('pokemons.destroy', $p->id) }}" method="post">
                         @can('isAdmin')
