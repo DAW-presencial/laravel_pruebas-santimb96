@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PokemonRequest;
 use App\Models\Pokemon;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class PokemonController extends Controller
 {
@@ -81,6 +77,23 @@ class PokemonController extends Controller
         $pokemon->fichero = $nombre_fichero;
         $pokemon->save();
 
+
+        //RAW
+         /*   DB::unprepared("insert into pokemons (nombre, nivel, fecha_capturado, tipo, genero, descripcion, shiny, user_id, fichero)
+        values('Batman', 23, '1999-01-01', json_encode($request->input('tipo')) , 'masculino', 'Un tío rico', 'f', Auth::user()->role, $nombre_fichero)");*/
+
+            //QUERYBUILDER
+
+            /*DB::table('pokemons')->insert([
+                'nombre'=>'Empoleon',
+                'nivel'=>45,
+                'fecha_capturado'=>Carbon::now('Europe/Madrid'),
+                'tipo'=>json_encode(['agua', 'acero']),
+                'genero'=>'masculino',
+                'descripcion'=>'Pokemon de tipo agua y acero',
+                'shiny'=>true,
+                'user_id'=>1
+            ]);*/
         return redirect()->route('pokemons.index');
         }
     }
