@@ -62,8 +62,13 @@ class VehiculoController extends Controller
     public function show($id)
     {
         $vehiculo = Vehiculo::where('id', $id)->get();
+        $vehiculoActual = Vehiculo::find($id);
+        $user = $vehiculoActual->users;
 
-        return view('vehiculo.show', compact('vehiculo'));
+        return view('vehiculo.show', [
+            'vehiculo'=>$vehiculo,
+            'user' =>$user
+        ]);
     }
 
     /**

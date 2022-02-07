@@ -20,6 +20,7 @@ class VehiculoSeeder extends Seeder
         $v->modelo = 'R25';
         $v->color = 'azul';
         $v->km = 40;
+        $v->user_id = 1;
         $v->save();
     }
 }

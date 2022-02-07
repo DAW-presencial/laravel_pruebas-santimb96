@@ -8,6 +8,7 @@
             <th scope="col">MODELO</th>
             <th scope="col">COLOR</th>
             <th scope="col">KM</th>
+            <th scope="col">PROPIETARIO</th>
             <th scope="col">OPCIONES</th>
         </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td>{{ $v->modelo }}</td>
                 <td>{{ $v->color }}</td>
                 <td>{{ $v->km }}</td>
+                <td>{{ $user->name }}</td>
                 <td>
                     <form action="{{ route('vehiculo.destroy', $v->id) }}" method="post">
                         @can('isAdmin')
