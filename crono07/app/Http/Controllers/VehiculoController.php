@@ -6,6 +6,7 @@ use App\Http\Requests\VehiculoRequest;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class VehiculoController extends Controller
 {
@@ -48,6 +49,7 @@ class VehiculoController extends Controller
         $v->modelo = $request->input('modelo');
         $v->color = $request->input('color');
         $v->km = $request->input('km');
+        $v->user_id = Auth::user()->id;
         $v->save();
 
         return redirect()->route('vehiculo.index');
@@ -102,6 +104,7 @@ class VehiculoController extends Controller
         $v->modelo = $request->input('modelo');
         $v->color = $request->input('color');
         $v->km = $request->input('km');
+        $v->user_id = Auth::user()->id;
         $v->save();
 
         return redirect()->route('vehiculo.index');
