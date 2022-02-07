@@ -95,9 +95,6 @@
                 </label>
             </div>
 
-            <label for="formFile" class="form-label">@lang('FICHERO')</label>
-            <input class="form-control" type="file" name="fichero" id="formFile">
-
             <div class="m-3 d-flex justify-content-center align-items-center">
                 <input class="btn btn-primary" type="submit" value="@lang('ENVIAR')" name="enviar"/>
             </div>

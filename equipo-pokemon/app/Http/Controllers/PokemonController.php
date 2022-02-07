@@ -154,11 +154,6 @@ class PokemonController extends Controller
     {
 
 
-        if ($request->hasFile('fichero')) {
-            $nombre_fichero = $request->file('fichero')->getClientOriginalName();
-            $request->file('fichero')->storeAs('public/image', $nombre_fichero);
-
-
             $pokemon = Pokemon::find($id);
 
             $pokemon->nombre = $request->input('nombre');
@@ -169,11 +164,9 @@ class PokemonController extends Controller
             $pokemon->descripcion = $request->input('descripcion');
             $pokemon->shiny = $request->input('shiny');
             $pokemon->user_id = Auth::user()->id;
-            $pokemon->fichero = $nombre_fichero;
             $pokemon->save();
 
             return redirect()->route('pokemons.index');
-        }
     }
 
     /**
