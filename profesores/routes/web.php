@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfesorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::resource('profesor', ProfesorController::class);
+
+Route::get('profesor/{id}/edit/{lang?}', [ProfesorController::class, 'edit']);
+Route::get('profesor/create/{lang?}', [ProfesorController::class, 'create']);

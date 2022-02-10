@@ -1,48 +1,37 @@
-@extends('pokemon.layout')
+@extends('profesor.layout')
 
 @section('contenido')
+    <h1>{{ __('prueba.Hola Mundo') }}</h1>
     <table class="table table-dark table-hover">
         <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">NOMBRE</th>
-            <th scope="col">NIVEL</th>
-            <th scope="col">CAPTURADO EN</th>
-            <th scope="col">TIPO</th>
-            <th scope="col">GÉNERO</th>
-            <th scope="col">DESCRIPCIÓN</th>
-            <th scope="col">SHINY</th>
-            <th scope="col">ENTRENADOR</th>
+            <th scope="col">ASIGNATURA</th>
+            <th scope="col">CONTRATO</th>
+            <th scope="col">ALUMNOS</th>
             <th scope="col">OPCIONES</th>
         </tr>
         </thead>
         <tbody>
-        @foreach( $pokemon as $p)
+        @foreach( $profesor as $p)
             <tr>
 
+                <td>{{ $p->id }}</td>
                 <td>{{ $p->nombre }}</td>
-                <td>{{ $p->nivel }}</td>
-                <td>{{ $p->fecha_capturado }}</td>
+                <td>{{ $p->asignatura }}</td>
+                <td>{{ $p->contrato ? 'SÍ': 'NO' }}</td>
                 <td>
                     <ul class="list-group">
-                        @foreach( json_decode($p->tipo) as $t)
-                            <li class="list-group-item list-group-item-dark"> {{ $t }} </li>
+                        @foreach( $alumnos as $a)
+                            <li class="list-group-item list-group-item-dark"> {{ $a->nombre }} </li>
                         @endforeach
                     </ul>
                 </td>
-                <td>{{ $p->genero }}</td>
-                <td>{{ $p->descripcion }}</td>
-                <td>{{ $p->shiny ? 'SÍ': 'NO' }}</td>
                 <td>
-                    <ul>
-                        <li class="list-group-item list-group-item-dark">NOMBRE: {{ $user->name }} </li>
-                        <li class="list-group-item list-group-item-dark">EMAIL: {{ $user->email }} </li>
-                        <li class="list-group-item list-group-item-dark">ROL: {{ $user->role }} </li>
-                    </ul>
-                </td>
-                <td>
-                    <form action="{{ route('pokemons.destroy', $p->id) }}" method="post">
+                    <form action="{{ route('profesor.destroy', $p->id) }}" method="post">
                         @can('isAdmin')
-                            <a class="btn btn-success" href="{{ route('pokemons.edit', $p->id) }}">Editar</a>
+                            <a class="btn btn-success" href="{{ route('profesor.edit', $p->id) }}">Editar</a>
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Borrar</button>
@@ -56,6 +45,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center align-items-center">
-        <button class="btn btn-primary" onclick="location.href = '{{ route('pokemons.index') }}'">Atrás</button>
+        <button class="btn btn-primary" onclick="location.href = '{{ route('profesor.index') }}'">Atrás</button>
     </div>
 @endsection
