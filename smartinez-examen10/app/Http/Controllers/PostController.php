@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Pokemon;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -82,7 +83,15 @@ class PostController extends Controller
         App::setLocale($lang);
         session($lang);
 
-        return view ('post.index');
+        $post = Post::where('id', $id)->first();
+
+        if(Auth::user()->id == $post->user_id){
+            return view('post.edit', compact('post'));
+        } else {
+            abort(401);
+        }
+
+
     }
 
     /**
@@ -90,11 +99,23 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $p = Post::find($id);
+
+        $p->titulo = $request->input('titulo');
+        $p->extracto = $request->input('extracto');
+        $p->contenido = $request->input('contenido');
+        $p->caducable = $request->input('caducable') !== null ?$request->input('caducable'): false;
+        $p->comentable = $request->input('comentable') !== null ?$request->input('comentable'): false;
+        $p->acceso = $request->input('acceso');
+        $p->fecha_publicacion = $request->input('fecha_publicacion');
+        $p->user_id = Auth::user()->id;
+        $p->save();
+
+        return redirect()->route('post.index');
     }
 
     /**
