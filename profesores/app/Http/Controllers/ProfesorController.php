@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PokemonRequest;
 use App\Http\Requests\ProfesorRequest;
 use App\Models\Alumno;
-use App\Models\Pokemon;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -101,7 +100,7 @@ class ProfesorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PokemonRequest $request, $id)
+    public function update(ProfesorRequest $request, $id)
     {
         $p = Profesor::find($id);
 
