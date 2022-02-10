@@ -22,7 +22,7 @@
     @endif
 
     <div class="container d-flex justify-content-center align-items-center">
-        <form class="m-4 text-center" action="{{ route('post.update') }}" method="put" enctype="multipart/form-data">
+        <form class="m-4 text-center" action="{{ route('post.update', $post->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -45,8 +45,7 @@
 
             <div class="mb-3">
                 <label class="form-label">@lang('CADUCABLE')
-                    <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"
-                        {{ in_array('true', json_decode($post->caducable)) ? 'checked': ''}}/> />
+                    <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"/> />
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
@@ -54,7 +53,7 @@
             <div class="mb-3">
                 <label class="form-label">@lang('COMENTABLE')
                     <input class="form-check-input" type="checkbox" id="comentable" name="comentable" value="true"
-                        {{ in_array('true', json_decode($post->comentable)) ? 'checked': ''}}/> />
+                        /> />
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
