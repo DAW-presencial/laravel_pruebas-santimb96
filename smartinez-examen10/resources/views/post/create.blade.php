@@ -47,7 +47,7 @@
                 <label class="form-label">@lang('CADUCABLE')
                     <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"
                         {{ (is_array(old('caducable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
-                    <label for="caducable1" class="form-check-label">@lang('SÍ')</label>
+                    <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
 
@@ -55,7 +55,7 @@
                 <label class="form-label">@lang('COMENTABLE')
                     <input class="form-check-input" type="checkbox" id="comentable" name="comentable" value="true"
                         {{ (is_array(old('comentable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
-                    <label for="caducable1" class="form-check-label">@lang('SÍ')</label>
+                    <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
 
