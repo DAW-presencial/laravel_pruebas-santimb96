@@ -120,7 +120,7 @@ class ProfesorController extends Controller
      */
     public function destroy($id)
     {
-        Pokemon::destroy($id);
+        Profesor::destroy($id);
 
         return redirect()->route('profesor.index');
     }
