@@ -27,26 +27,26 @@
             @method('PUT')
             <div class="mb-3">
                 <label class="form-label">{{ __('labels.TÍTULO') }}
-                    <input class="form-control" type="text" id="titulo" name="titulo" value="{{ old('titulo') }}" required/>
+                    <input class="form-control" type="text" id="titulo" name="titulo" value="{{ old('titulo', $post->titulo ?? '') }}" required/>
                 </label>
             </div>
             <div class="mb-3">
                 <label class="form-label">{{ __('labels.EXTRACTO') }}
-                    <input class="form-control" type="text" id="extracto" name="extracto" value="{{ old('extracto') }}"/>
+                    <input class="form-control" type="text" id="extracto" name="extracto" value="{{ old('extracto', $post->extracto ?? '') }}"/>
                 </label>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">{{ __('labels.CONTENIDO') }}
                     <textarea class="form-control" id="contenido"
-                              name="contenido" required>{{ old('contenido') }}</textarea>
+                              name="contenido" required>{{ old('contenido', $post->contenido ?? '') }}</textarea>
                 </label>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">@lang('CADUCABLE')
                     <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"
-                        {{ (is_array(old('caducable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
+                        {{ in_array('true', json_decode($post->caducable)) ? 'checked': ''}}/> />
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
@@ -54,7 +54,7 @@
             <div class="mb-3">
                 <label class="form-label">@lang('COMENTABLE')
                     <input class="form-check-input" type="checkbox" id="comentable" name="comentable" value="true"
-                        {{ (is_array(old('comentable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
+                        {{ in_array('true', json_decode($post->comentable)) ? 'checked': ''}}/> />
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
@@ -63,8 +63,8 @@
             <div class="mb-3">
                 <label class="form-label">@lang('ACCESO')
                     <select name="acceso" id="acceso">
-                        <option value="privado" {{ old('acceso') == 'privado' ? 'selected': '' }}>@lang('PRIVADO')</option>
-                        <option value="publico" {{ old('acceso') == 'publico' ? 'selected': '' }}>@lang('PÚBLICO')</option>
+                        <option value="privado" {{ $post->acceso == 'privado' ? 'selected': '' }}>@lang('PRIVADO')</option>
+                        <option value="publico" {{ $post->acceso == 'publico' ? 'selected': '' }}>@lang('PÚBLICO')</option>
                     </select>
                 </label>
             </div>
@@ -72,7 +72,7 @@
             <div class="mb-3">
                 <label class="form-label">@lang('FECHA DE PUBLICACIÓN')
                     <input class="form-control" type="date" id="fecha_publicacion" name="fecha_publicacion"
-                           value="{{ old('fecha_publicacion') }}" required/>
+                           value="{{ old('fecha_publicacion', $post->fecha_publicacion ?? '') }}" required/>
                 </label>
             </div>
 
