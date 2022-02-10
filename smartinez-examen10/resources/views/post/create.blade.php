@@ -7,7 +7,7 @@
                 <table class="table table-dark table-hover text-danger text-center">
                     <thead>
                     <tr>
-                        <th scope="col">Errores</th>
+                         <th scope="col">Errores</th>
                     </tr>
                     </thead>
                     <tbody>
