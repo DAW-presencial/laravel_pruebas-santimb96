@@ -45,7 +45,7 @@
 
             <div class="mb-3">
                 <label class="form-label">@lang('CADUCABLE')
-                    <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"/> />
+                    <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"/>
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
@@ -53,7 +53,7 @@
             <div class="mb-3">
                 <label class="form-label">@lang('COMENTABLE')
                     <input class="form-check-input" type="checkbox" id="comentable" name="comentable" value="true"
-                        /> />
+                        />
                     <label for="caducable1" class="form-check-label"></label>
                 </label>
             </div>
