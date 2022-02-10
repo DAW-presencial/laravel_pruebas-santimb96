@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -19,22 +23,37 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create()
+    public function create($lang = 'es')
     {
-        //
+        App::setLocale($lang);
+        session($lang);
+
+        return view('post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $p = new Post;
+
+        $p->titulo = $request->input('nombre');
+        $p->extracto = $request->input('extracto');
+        $p->contenido = $request->input('contenido');
+        $p->caducable = $request->input('caducable');
+        $p->comentable = $request->input('comentable');
+        $p->acceso = $request->input('acceso');
+        $p->fecha_publicacion = $request->input('fecha_publicacion');
+        $p->user_id = Auth::user()->id;
+        $p->save();
+
+        return redirect()->route('post.create');
     }
 
     /**
@@ -52,11 +71,14 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $lang = 'es')
     {
-        //
+        App::setLocale($lang);
+        session($lang);
+
+        return view ('post.edit');
     }
 
     /**
