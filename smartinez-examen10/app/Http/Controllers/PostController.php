@@ -43,11 +43,11 @@ class PostController extends Controller
     {
         $p = new Post;
 
-        $p->titulo = $request->input('nombre');
+        $p->titulo = $request->input('titulo');
         $p->extracto = $request->input('extracto');
         $p->contenido = $request->input('contenido');
-        $p->caducable = $request->input('caducable');
-        $p->comentable = $request->input('comentable');
+        $p->caducable = $request->input('caducable') !== null ?$request->input('caducable'): false;
+        $p->comentable = $request->input('comentable') !== null ?$request->input('comentable'): false;
         $p->acceso = $request->input('acceso');
         $p->fecha_publicacion = $request->input('fecha_publicacion');
         $p->user_id = Auth::user()->id;

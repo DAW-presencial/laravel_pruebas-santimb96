@@ -184,6 +184,8 @@
     "COMENTABLE": "COMMENTABLE",
     "ACCESO": "ACCES",
     "FECHA DE PUBLICACIÓN": "PUBLICATION DATE",
+    "PRIVADO": "PRIVATE",
+    "PÚBLICO": "PUBLIC",
     "SÍ": "YES",
     "ENVIAR": "SEND",
     "Crear": "Create",

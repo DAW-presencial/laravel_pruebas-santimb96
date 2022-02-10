@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'TITULO'=>'TITULO',
-  'EXTRACTO'=>'EXTRACT',
-  'CONTENIDO'=>'CONTENT'
+    'TÍTULO'=>'TITLE',
+    'EXTRACTO'=>'EXTRACT',
+    'CONTENIDO'=>'CONTENT'
 ];

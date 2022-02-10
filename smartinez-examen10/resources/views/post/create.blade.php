@@ -1,10 +1,6 @@
-@extends('pokemon.layout')
+@extends('post.layout')
 
 @section('contenido')
-
-    @php
-        //value="{{ old('nombre', $superheroe->nombre ?? '') }}" old value
-    @endphp
 
         @if($errors->any())
             <div class="d-flex justify-content-center align-items-center full-width">
@@ -26,75 +22,59 @@
         @endif
 
     <div class="container d-flex justify-content-center align-items-center">
-        <form class="m-4 text-center" action="{{ route('pokemons.store') }}" method="post" enctype="multipart/form-data">
+        <form class="m-4 text-center" action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="mb-3">
-                <label class="form-label">@lang('NOMBRE')
-                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required/>
+                <label class="form-label">{{ __('labels.TÍTULO') }}
+                    <input class="form-control" type="text" id="titulo" name="titulo" value="{{ old('titulo') }}" required/>
                 </label>
             </div>
             <div class="mb-3">
-                <label class="form-label">@lang('NIVEL')
-                    <input class="form-control" type="number" id="nivel" name="nivel" value="{{ old('nivel') }}" required/>
-                </label>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">@lang('CAPTURADO EL DÍA')
-                    <input class="form-control" type="date" id="fecha_capturado" name="fecha_capturado"
-                           value="{{ old('fecha_capturado') }}" required/>
+                <label class="form-label">{{ __('labels.EXTRACTO') }}
+                    <input class="form-control" type="text" id="extracto" name="extracto" value="{{ old('extracto') }}"/>
                 </label>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">@lang('TIPO')
-                    <input class="form-check-input" type="checkbox" id="poderes1" name="tipo[]" value="acero"
-                        {{ (is_array(old('tipo')) and in_array('acero', old('tipo'))) ? 'checked' : '' }} />
-                    <label for="poderes1" class="form-check-label">@lang('ACERO')</label>
-                    <input class="form-check-input" type="checkbox" id="poderes2" name="tipo[]" value="agua"
-                        {{ (is_array(old('tipo')) and in_array('agua', old('tipo'))) ? 'checked' : '' }} />
-                    <label for="poderes2" class="form-check-label">@lang('AGUA')</label>
-                    <input class="form-check-input" type="checkbox" id="poderes3" name="tipo[]" value="fuego"
-                        {{ (is_array(old('tipo')) and in_array('fuego', old('tipo'))) ? 'checked' : '' }} />
-                    <label for="poderes3" class="form-check-label">@lang('FUEGO')</label>
-                    <input class="form-check-input" type="checkbox" id="poderes3" name="tipo[]" value="volador"
-                        {{ (is_array(old('tipo')) and in_array('volador', old('tipo'))) ? 'checked' : '' }} />
-                    <label for="poderes3" class="form-check-label">@lang('VOLADOR')</label>
+                <label class="form-label">{{ __('labels.CONTENIDO') }}
+                    <textarea class="form-control" id="contenido"
+                              name="contenido" required >{{ old('contenido') }}</textarea>
                 </label>
             </div>
 
             <div class="mb-3">
-                <div class="mb-3">@lang('GÉNERO')</div>
-                <div class="mb-3">
-                    <label for="genero1" class="form-check-label">@lang('MASCULINO')</label>
-                    <input type="radio" id="genero1" name="genero" value="masculino"
-                        {{ old('genero') == 'masculino' ? 'checked': '' }} />
-                    <label for="genero2" class="form-check-label">@lang('FEMENINO')</label>
-                    <input type="radio" id="genero2" name="genero" value="femenino"
-                        {{ old('genero') == 'femenino' ? 'checked': '' }} />
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">@lang('DESCRIPCIÓN')
-                    <textarea class="form-control" id="descripcion"
-                              name="descripcion" required>{{ old('descripcion') }}</textarea>
+                <label class="form-label">@lang('CADUCABLE')
+                    <input class="form-check-input" type="checkbox" id="caducable" name="caducable" value="true"
+                        {{ (is_array(old('caducable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
+                    <label for="caducable1" class="form-check-label">@lang('SÍ')</label>
                 </label>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">@lang('SHINY')
-                    <select name="shiny" id="shiny">
-                        <option value="true" {{ old('shiny') == 'true' ? 'selected': '' }}>@lang('SÍ')</option>
-                        <option value="false" {{ old('shiny') == 'false' ? 'selected': '' }}>@lang('NO')</option>
+                <label class="form-label">@lang('COMENTABLE')
+                    <input class="form-check-input" type="checkbox" id="comentable" name="comentable" value="true"
+                        {{ (is_array(old('comentable')) and in_array('true', old('caducable'))) ? 'checked' : '' }} />
+                    <label for="caducable1" class="form-check-label">@lang('SÍ')</label>
+                </label>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">@lang('ACCESO')
+                    <select name="acceso" id="acceso">
+                        <option value="privado" {{ old('acceso') == 'privado' ? 'selected': '' }}>@lang('PRIVADO')</option>
+                        <option value="publico" {{ old('acceso') == 'publico' ? 'selected': '' }}>@lang('PÚBLICO')</option>
                     </select>
                 </label>
             </div>
 
-
-            <label for="formFile" class="form-label">@lang('FICHERO')</label>
-            <input class="form-control" type="file" name="fichero" id="formFile">
+            <div class="mb-3">
+                <label class="form-label">@lang('FECHA DE PUBLICACIÓN')
+                    <input class="form-control" type="date" id="fecha_publicacion" name="fecha_publicacion"
+                           value="{{ old('fecha_publicacion') }}" required/>
+                </label>
+            </div>
 
             <div class="m-3 d-flex justify-content-center align-items-center">
                 <input class="btn btn-primary" type="submit" value="@lang('ENVIAR')" name="enviar"/>
