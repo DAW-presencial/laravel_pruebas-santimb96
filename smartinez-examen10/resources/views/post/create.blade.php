@@ -39,7 +39,7 @@
             <div class="mb-3">
                 <label class="form-label">{{ __('labels.CONTENIDO') }}
                     <textarea class="form-control" id="contenido"
-                              name="contenido" required >{{ old('contenido') }}</textarea>
+                              name="contenido" required>{{ old('contenido') }}</textarea>
                 </label>
             </div>
 
