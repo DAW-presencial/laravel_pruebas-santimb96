@@ -14,11 +14,14 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $post = Post::select('*')->orderBy('id')->get()->toJson();
+        $post = json_decode($post);
+
+        return view('post.index', compact('post'));
     }
 
     /**
@@ -54,7 +57,7 @@ class PostController extends Controller
         $p->user_id = Auth::user()->id;
         $p->save();
 
-        return redirect()->route('post.create');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -79,7 +82,7 @@ class PostController extends Controller
         App::setLocale($lang);
         session($lang);
 
-        return view ('post.edit');
+        return view ('post.index');
     }
 
     /**
@@ -98,10 +101,12 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+
+        return redirect()->route('post.index');
     }
 }

@@ -28,8 +28,8 @@ class Post extends Model
     protected $table = 'posts';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['titulo', 'extracto', 'contenido', 'caducable', 'comentable', 'acceso', 'fecha_publicación'];
-    protected $visible = ['id', 'titulo', 'extracto', 'contenido', 'caducable', 'comentable', 'acceso', 'fecha_publicación', 'user_id'];
+    protected $fillable = ['titulo', 'extracto', 'contenido', 'caducable', 'comentable', 'acceso', 'fecha_publicacion'];
+    protected $visible = ['id', 'titulo', 'extracto', 'contenido', 'caducable', 'comentable', 'acceso', 'fecha_publicacion', 'user_id'];
 
     public function users () {
         return $this->belongsTo(User::class, 'user_id', 'id');
