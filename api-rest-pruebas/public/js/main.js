@@ -1,0 +1,119 @@
+function pintarPokemon() {
+    const getData = async () => {
+        const response = await fetch('/api/pokemon');
+        return await response.json();
+    }
+    getData().then(data => {
+        let output = `<table><thead><tr>
+                    <th>NOMBRE</th>
+                    <th>NIVEL</th>
+                    <th>OPCIONES</th>
+                    </tr></thead><tbody>`;
+        data.forEach(pokemon => {
+            output += `<tr>
+                <td>${pokemon.nombre}</td>
+                <td>${pokemon.nivel}</td>
+                <td><button onclick="deletePokemon(${pokemon.id})">Borrar</button>
+                <button onclick="editPokemon(${pokemon.id})">Editar</button>
+                <button onclick="showData(${pokemon.id})">Mostrar</button></td>
+                </tr>`;
+        });
+        output += `</tbody></table>`;
+
+        document.getElementById('pokemon').innerHTML = output;
+    });
+}
+
+function showData(id) {
+    const showPokemon = async (id) => {
+        const response = await fetch(`../../api/pokemon/${id}`);
+        return await response.json();
+    }
+    showPokemon(id).then(data => {
+        document.getElementById('pokemon').innerHTML = `<table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>NIVEL</th>
+                        <th>OPCIONES</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${data.id}</td>
+                        <td>${data.nombre}</td>
+                        <td>${data.nivel}</td>
+                        <td><button onclick="location.href='/pokemons'">Atrás</button>
+                    </tr>
+                    </tbody>
+                    </table>`;
+    });
+}
+
+function editPokemon(id) {
+    location.href = `pokemons/${id}/edit`;
+}
+
+function updateData(id) {
+    let obj = {
+        nombre: document.getElementById('nombre').value,
+        nivel: document.getElementById('nivelPokemon').value
+    };
+    const updatePokemon = async (obj, id) => {
+        const settings = {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj)
+        }
+        await fetch(`../../api/pokemon/${id}`, settings);
+    }
+    updatePokemon(obj, id).then(() => {
+        location.href = '/pokemons';
+    });
+
+}
+
+function deletePokemon(id) {
+    const delPokemon = async (id) => {
+        const settings = {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        await fetch(`../../api/pokemon/${id}`, settings);
+    }
+    delPokemon(id).then(() => {
+        location.reload();
+    });
+}
+
+function postData() {
+    let obj = {
+        nombre: document.getElementById('nombre').value,
+        nivel: document.getElementById('nivelPokemon').value
+    };
+
+    /*let xhr = new XMLHttpRequest();
+    xhr.open("POST", "../../api/pokemon", true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(JSON.stringify(obj));
+*/
+
+    const post = async (obj) => {
+        const settings = {
+            method: 'post',
+            body: JSON.stringify(obj),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        await fetch('../../api/pokemon', settings);
+    }
+    post(obj).then(() => {
+        location.href = '/pokemons';
+    });
+}
