@@ -28,3 +28,4 @@ Route::resource('profesor', ProfesorController::class);
 
 Route::get('profesor/{id}/edit/{lang?}', [ProfesorController::class, 'edit']);
 Route::get('profesor/create/{lang?}', [ProfesorController::class, 'create']);
+Route::post('profesor/lenguaje', [ProfesorController::class, 'lenguaje']);

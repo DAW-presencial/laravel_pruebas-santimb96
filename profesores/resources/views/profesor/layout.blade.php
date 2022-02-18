@@ -20,15 +20,24 @@
         </button>
     </form>
     @if(Auth::user() !== null)
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout
-        </button>
-    </form>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Logout
+            </button>
+        </form>
     @endif
 
+    <form action='lenguaje' method="post">
+        @csrf
+        @method( 'POST' )
+        <div class="mb-3">
+                <input type="submit" value="en" name="lengua" id="lengua"/>
+                <input type="submit" value="es" name="lengua" id="lengua"/>
+        </div>
+    </form>
+
     <div class="container d-flex justify-content-center align-items-center mt-4 mb-4">
-        <!--<img src="{{ URL::asset('/assets/marvel.png') }}" alt="marvel" style="width: 100px; height: 100px;"/>-->
+    <!--<img src="{{ URL::asset('/assets/marvel.png') }}" alt="marvel" style="width: 100px; height: 100px;"/>-->
         <h1 class="text-center m-4">Profesores y sus alumnos</h1>
     </div>
 

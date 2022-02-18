@@ -1,16 +1,23 @@
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<form name="formData" id="form">
+@extends('pokemon.layout')
+@section('contenido')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <form name="formData" id="form">
 
-    <label for="nombre">NOMBRE
-        <input id="nombre" name="nombre" value="{{ $p->nombre }}" type="text">
-    </label>
-
-    <label for="nivelPokemon">NIVEL
-        <input id="nivelPokemon" name="nivel" value="{{ $p->nivel }}" type="number">
-    </label>
-
-    <button onclick="updateData({{ $p->id }})">Enviar</button>
-</form>
-<script src="../../js/main.js"></script>
+                    <div class="mb-3">
+                        <label class="form-label" for="nombre">NOMBRE
+                            <input class="form-control" id="nombre" value="{{ $p->nombre }}" name="nombre" type="text">
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="nivelPokemon">NIVEL
+                            <input class="form-control" id="nivelPokemon" value="{{ $p->nivel }}" name="nivel" type="number">
+                        </label>
+                    </div>
+                    <button class="btn btn-primary col-12" onclick="updateData({{ $p->id }})">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

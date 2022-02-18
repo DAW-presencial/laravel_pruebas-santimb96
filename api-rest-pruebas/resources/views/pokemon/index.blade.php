@@ -1,28 +1,14 @@
-<body onload="pintarPokemon()">
+@extends('pokemon.layout')
 
-<div id="pokemon">
+@section('contenido')
+    <button class="btn btn-success" onclick="location.href = '{{ route('pokemons.create') }}'">Crear</button>
 
-</div>
-</body>
+    <div id="pokemon"></div>
 
-<script src="../js/main.js">
-
-    function filtrar() {
-
-        const id = document.getElementById('id').value;
-
-        const getData = async (id) => {
-                const response = await fetch(`/api/pokemon/${id}`);
-                console.log(response.status);
-
-                if(response.status === 200){
-                    const data = await response.json();
-                    return document.getElementById('pokemon').innerHTML = `<ul><li>${data.id}, ${data.nombre}</li></ul>`;
-                } else {
-                    return document.getElementById('pokemon').innerHTML = 'No se ha encontrado ningún resultado';
-                }
+    <script>
+        window.onload = function () {
+            pintarPokemon();
         }
-        getData(id);
+    </script>
+@endsection
 
-    }
-</script>

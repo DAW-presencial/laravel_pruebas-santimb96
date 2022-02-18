@@ -1,8 +1,10 @@
-<body>
+@extends('pokemon.layout')
 
-<div id="pokemon">
-
-</div>
-</body>
-
-<script src="../js/main.js"></script>
+@section('contenido')
+    <div id="pokemon"></div>
+    <script>
+        window.onload = function(){
+            showData({{ $id }});
+        }
+    </script>
+@endsection

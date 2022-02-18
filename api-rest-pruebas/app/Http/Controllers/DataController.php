@@ -46,7 +46,7 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        return view('pokemon.show');
+        return view('pokemon.show', compact('id'));
     }
 
     /**

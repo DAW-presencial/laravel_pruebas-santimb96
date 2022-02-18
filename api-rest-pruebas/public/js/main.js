@@ -4,18 +4,18 @@ function pintarPokemon() {
         return await response.json();
     }
     getData().then(data => {
-        let output = `<table><thead><tr>
-                    <th>NOMBRE</th>
-                    <th>NIVEL</th>
-                    <th>OPCIONES</th>
+        let output = `<table class="table table-dark text-center"><thead><tr>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">NIVEL</th>
+                    <th scope="col">OPCIONES</th>
                     </tr></thead><tbody>`;
         data.forEach(pokemon => {
             output += `<tr>
                 <td>${pokemon.nombre}</td>
                 <td>${pokemon.nivel}</td>
-                <td><button onclick="deletePokemon(${pokemon.id})">Borrar</button>
-                <button onclick="editPokemon(${pokemon.id})">Editar</button>
-                <button onclick="showData(${pokemon.id})">Mostrar</button></td>
+                <td><button class="btn btn-danger" onclick="deletePokemon(${pokemon.id})">Borrar</button>
+                <button class="btn btn-primary" onclick="editPokemon(${pokemon.id})">Editar</button>
+                <button class="btn btn-info" onclick="location.href ='pokemons/${pokemon.id}' ">Mostrar</button></td>
                 </tr>`;
         });
         output += `</tbody></table>`;
@@ -30,13 +30,13 @@ function showData(id) {
         return await response.json();
     }
     showPokemon(id).then(data => {
-        document.getElementById('pokemon').innerHTML = `<table>
+        document.getElementById('pokemon').innerHTML = `<table class="table table-dark text-center">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>NOMBRE</th>
-                        <th>NIVEL</th>
-                        <th>OPCIONES</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">NIVEL</th>
+                        <th scope="col">OPCIONES</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@ function showData(id) {
                         <td>${data.id}</td>
                         <td>${data.nombre}</td>
                         <td>${data.nivel}</td>
-                        <td><button onclick="location.href='/pokemons'">Atrás</button>
+                        <td><button class="btn btn btn-secondary" onclick="location.href='/pokemons'">Atrás</button>
                     </tr>
                     </tbody>
                     </table>`;

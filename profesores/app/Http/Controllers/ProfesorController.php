@@ -8,6 +8,8 @@ use App\Models\Alumno;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use Locale;
 
 class ProfesorController extends Controller
 {
@@ -30,8 +32,8 @@ class ProfesorController extends Controller
      */
     public function create($lang = 'es')
     {
-        App::setLocale($lang);
-        session($lang);
+        /*App::setLocale($lang);
+        session($lang);*/
 
         return view ('profesor.create');
     }
@@ -85,8 +87,8 @@ class ProfesorController extends Controller
      */
     public function edit($id, $lang = 'es')
     {
-        App::setLocale($lang);
-        session($lang);
+        /*App::setLocale($lang);
+        session($lang);*/
 
         $profesor = Profesor::where('id', $id)->first();
 
@@ -132,5 +134,13 @@ class ProfesorController extends Controller
          array_push($alumnos, Alumno::find($id));
      }
      return $alumnos;
+    }
+
+    public function lenguaje (Request $request) {
+
+        App::setLocale($request->input('lengua'));
+        session($request->input('lengua'));
+
+        return redirect()->back();
     }
 }
